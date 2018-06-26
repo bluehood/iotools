@@ -19,7 +19,7 @@
 
 #include <Compression.h>
 #ifndef HAS_LZ4
-#include <ROOT/TDataFrame.hxx>
+#include <ROOT/RDataFrame.hxx>
 #endif
 #include <TChain.h>
 #include <TClassTable.h>
@@ -595,7 +595,7 @@ int AnalyzeRootDataframe(
     nslots = ROOT::GetImplicitMTPoolSize();
     printf("Using %u slots\n", nslots);
   }
-  ROOT::Experimental::TDataFrame frame(root_chain);
+  ROOT::RDataFrame frame(root_chain);
 
   std::vector<double> sums(nslots, 0.0);
 
@@ -758,7 +758,6 @@ static void Usage(const char *progname) {
 
 
 int main(int argc, char **argv) {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 // Avoid version mismatch error message (FlatEvent not needed for LZ4)
 #ifndef HAS_LZ4
   if (!TClassTable::GetDict("FlatEvent")) {
