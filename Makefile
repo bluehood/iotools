@@ -1,11 +1,9 @@
-CFLAGS_CUSTOM = -std=c99 -Wall -pthread -g -O2
 CXXFLAGS_CUSTOM = -std=c++11 -Wall -pthread -Wall -g -O2 \
 		  -I/opt/avro-c-1.8.2/include \
 		  -I/opt/parquet-cpp-1.2.0/include
 CXXFLAGS_ROOT = $(shell root-config --cflags)
 LDFLAGS_CUSTOM = -L/opt/avro-c-1.8.2/lib \
 		 -L/opt/parquet-cpp-1.2.0/lib64
-LIBS_PARQUET = -lparquet -larrow -lthrift -lboost_regex
 LDFLAGS_ROOT = $(shell root-config --libs) -lTreePlayer
 CFLAGS = $(CFLAGS_CUSTOM)
 CXXFLAGS = $(CXXFLAGS_CUSTOM) $(CXXFLAGS_ROOT)
@@ -19,11 +17,10 @@ AVRO_TOOLS=/opt/avro-java-1.8.2/avro-tools-1.8.2.jar
 
 all: libiotrace.so iotrace_capture iotrace_test \
   atlas_aod \
-  lhcb_opendata lhcb_opendata.lz4 \
+  lhcb_opendata \
   libEvent.so \
   precision_test \
-	mkfaulty \
-	fuse_forward
+	mkfaulty
 
 .PHONY = clean benchmarks benchmark_clean
 
@@ -56,17 +53,7 @@ libEvent.so: event.cxx
 	g++ -shared -fPIC -o$@ $(CXXFLAGS) event.cxx $(LDFLAGS)
 
 lhcb_opendata: lhcb_opendata.cc lhcb_opendata.h util.h util.o event.h
-	g++ $(CXXFLAGS) -o lhcb_opendata lhcb_opendata.cc util.o \
-		-lhdf5 -lhdf5_hl -lsqlite3 -lavro -lprotobuf $(LDFLAGS) -lz $(LIBS_PARQUET)
-
-lhcb_opendata.lz4: lhcb_opendata.cc lhcb_opendata.h util.h util.o
-	g++ $(CXXFLAGS_CUSTOM) $(CXXFLAGS_ROOT_LZ4) -o $@ \
-		lhcb_opendata.cc util.o \
-		-lhdf5 -lhdf5_hl -lsqlite3 -lavro -lprotobuf \
-		$(LDFLAGS_CUSTOM) $(LDFLAGS_ROOT_LZ4) \
-		-lz $(LIBS_PARQUET)
-
-
+	g++ $(CXXFLAGS) -o lhcb_opendata lhcb_opendata.cc util.o $(LDFLAGS) -lz -DHAS_LZ4
 
 schema_aod/aod.cxx: $(wildcard schema_aod/*.h)
 	cd schema_aod && \
@@ -96,16 +83,13 @@ clear_page_cache: clear_page_cache.c
 	sudo chown root clear_page_cache
 	sudo chmod 4755 clear_page_cache
 
-BM_DATA_PREFIX = data/lhcb/MagnetDown/B2HHH
+BM_DATA_PREFIX = ./B2HHH
 BM_SHORTDATA_PREFIX = data/lhcb/Short/B2HHH
 BM_FAULTYDATA_PREFIX = data/lhcb/Faulty/B2HHH
 BM_USBDATA_PATH = data/usb-storage/benchmark-root/lhcb/MagnetDown
 BM_USBDATA_PREFIX = $(BM_USBDATA_PATH)/B2HHH
 BM_EOSDATA_PATH = /eos/pps/users/jblomer
 BM_EOSDATA_PREFIX = $(BM_EOSDATA_PATH)/B2HHH
-
-BM_BINEXT_root-lz4 = .lz4
-BM_ENV_root-lz4 = LD_LIBRARY_PATH=/opt/root_lz4/lib:$$LD_LIBRARY_PATH
 
 BM_BITFLIP_NITER = 100
 BM_BITFLIP_EXPECTED = 56619375330.364952
@@ -443,8 +427,6 @@ graph_detail_serialization~evs.root: detail_serialization.txt
 
 
 graph_detail_flavor~evs.root: $(wildcard result_read_mem.*.txt)
-	rm -f result_read_mem.*.txt
-	cp acat_result_flavor/* .
 	BM_FIELD=realtime BM_RESULT_SET=result_read_mem ./bm_combine.sh
 	sed -i -e 's/^/flavor-/' result_read_mem.txt
 	root -q -l 'bm_timing.C("result_read_mem", "READ Throughput LHCb OpenData, warm cache", "$@", 8000000, true, 2)'
