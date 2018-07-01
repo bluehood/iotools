@@ -158,6 +158,17 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
   (*props_map)["flavor-root-inflated~dataframenoht"] =
    GraphProperties(kGraphInflated, "RDataFrameMT no-HT", 3);
 
+  (*props_map)["flavor-root"] =
+   GraphProperties(kGraphInflated, "SetBranchAddress", 0);
+  (*props_map)["flavor-root~treereader"] =
+   GraphProperties(kGraphInflated, "TTreeReader", 1);
+  (*props_map)["flavor-root~dataframe"] =
+   GraphProperties(kGraphInflated, "RDataFrame", 2);
+  (*props_map)["flavor-root~dataframemt"] =
+   GraphProperties(kGraphInflated, "RDataFrameMT", 4);
+  (*props_map)["flavor-root~dataframenoht"] =
+   GraphProperties(kGraphInflated, "RDataFrameMT no-HT", 3);
+
   (*props_map)["flavor-root-deflated"] =
     GraphProperties(kGraphDeflated, "SetBranchAddress", 10);
   (*props_map)["flavor-root-deflated~treereader"] =
