@@ -18,9 +18,7 @@
 #include <vector>
 
 #include <Compression.h>
-#ifndef HAS_LZ4
 #include <ROOT/RDataFrame.hxx>
-#endif
 #include <TChain.h>
 #include <TClassTable.h>
 #include <TSystem.h>
@@ -580,9 +578,6 @@ int AnalyzeRootDataframe(
   bool multi_threaded,
   bool hyper_threading)
 {
-#ifdef HAS_LZ4
-  return 0;
-#else
   TChain root_chain("DecayTree");
   for (const auto &p : input_paths)
     root_chain.Add(p.c_str());
@@ -672,7 +667,6 @@ int AnalyzeRootDataframe(
   printf("finished (%u events), result: %lf, skipped ?\n",
          nevent, total_sum);
   return 0;
-#endif
 }
 
 
