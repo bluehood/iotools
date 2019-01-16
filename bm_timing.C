@@ -145,7 +145,7 @@ void bm_timing(TString dataSet="result_read_mem",
   else
     graph_throughput = graph_map[kGraphRead].graph;
   graph_throughput->SetTitle(title);
-  graph_throughput->GetXaxis()->SetTitle("File format");
+  graph_throughput->GetXaxis()->SetTitle("ROOT I/O API");
   graph_throughput->GetXaxis()->SetTitleSize(0.04);
   graph_throughput->GetXaxis()->CenterTitle();
   graph_throughput->GetXaxis()->SetTickSize(0);

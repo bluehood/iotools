@@ -23,15 +23,15 @@ struct GraphProperties {
 
 void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
   (*props_map)["root-inflated"] =
-   GraphProperties(kGraphInflated, "ROOT", 0);
+   GraphProperties(kGraphInflated, "SetBranchAddress", 0);
   (*props_map)["root-inflated~treereader"] =
-   GraphProperties(kGraphInflated, "ROOT / TTreeReader", 1);
+   GraphProperties(kGraphInflated, "TTreeReader", 1);
   (*props_map)["root-inflated~dataframe"] =
-   GraphProperties(kGraphInflated, "ROOT / RDataFrame", 2);
+   GraphProperties(kGraphInflated, "RDataFrame", 2);
   (*props_map)["root-inflated~dataframemt"] =
-   GraphProperties(kGraphInflated, "ROOT / RDataFrameMT", 4);
+   GraphProperties(kGraphInflated, "RDataFrameMT", 4);
   (*props_map)["root-inflated~dataframenoht"] =
-   GraphProperties(kGraphInflated, "ROOT / RDataFrameMT/no-HT", 3);
+   GraphProperties(kGraphInflated, "RDataFrameMT/no-HT", 3);
 
   (*props_map)["root-inflated+times10"] =
    GraphProperties(kGraphInflated, "ROOTx10 (inflated)", 0);
@@ -46,15 +46,15 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
                    "ROOTx10 / RDataFrameMT/no-HT (inflated)", 4);
 
   (*props_map)["root-deflated"] =
-    GraphProperties(kGraphDeflated, "ROOT (zlib)", 10);
+    GraphProperties(kGraphDeflated, "SetBranchAddress", 10);
   (*props_map)["root-deflated~treereader"] =
-    GraphProperties(kGraphDeflated, "ROOT / TTreeReader (zlib)", 11);
+    GraphProperties(kGraphDeflated, "TTreeReader", 11);
   (*props_map)["root-deflated~dataframe"] =
-    GraphProperties(kGraphDeflated, "ROOT / RDataFrame (zlib)", 12);
+    GraphProperties(kGraphDeflated, "RDataFrame", 12);
   (*props_map)["root-deflated~dataframemt"] =
-    GraphProperties(kGraphDeflated, "ROOT / RDataFrameMT (zlib)", 14);
+    GraphProperties(kGraphDeflated, "RDataFrameMT", 14);
     (*props_map)["root-deflated~dataframenoht"] =
-    GraphProperties(kGraphDeflated, "ROOT / RDataFrameMT/no-HT (zlib)", 13);
+    GraphProperties(kGraphDeflated, "RDataFrameMT/no-HT", 13);
   (*props_map)["root-lz4"] =
     GraphProperties(kGraphDeflated, "ROOT (LZ4)", 20);
   (*props_map)["root-lzma"] =
@@ -64,7 +64,7 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
   (*props_map)["rootrow-inflated~unfixed"] =
     GraphProperties(kGraphInflated, "ROOT (row-wise)", 25);
   (*props_map)["rootrow-inflated~fixed"] =
-    GraphProperties(kGraphInflated, "ROOT / Fixed (row-wise)", 26);
+    GraphProperties(kGraphInflated, "Fixed (row-wise)", 26);
   (*props_map)["rootautosplit-inflated"] =
     GraphProperties(kGraphInflated, "ROOT (inflated, auto-split)", 26);
 
@@ -76,28 +76,28 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
     GraphProperties(kGraphDeflated, "ROOT (LZ4, deep split)", 29);
 
   (*props_map)["rootautosplit-inflated~treereader"] =
-    GraphProperties(kGraphInflated, "ROOT / TTreeReader (inflated, auto-split)",
+    GraphProperties(kGraphInflated, "TTreeReader (inflated, auto-split)",
                     27);
   (*props_map)["rootautosplit-inflated~dataframe"] =
-    GraphProperties(kGraphInflated, "ROOT / RDataFrame (inflated, auto-split)",
+    GraphProperties(kGraphInflated, "RDataFrame (inflated, auto-split)",
                     28);
   (*props_map)["rootautosplit-inflated~dataframemt"] =
     GraphProperties(kGraphInflated,
-                    "ROOT / RDataFrameMT (inflated, auto-split)", 29);
+                    "RDataFrameMT (inflated, auto-split)", 29);
   (*props_map)["rootautosplit-deflated"] =
     GraphProperties(kGraphDeflated, "ROOT (zlib, auto-split)", 30);
   (*props_map)["rootautosplit-deflated~treereader"] =
-    GraphProperties(kGraphDeflated, "ROOT / TTreeReader (zlib, auto-split)",
+    GraphProperties(kGraphDeflated, "TTreeReader (zlib, auto-split)",
                     31);
   (*props_map)["rootautosplit-deflated~dataframe"] =
-    GraphProperties(kGraphDeflated, "ROOT / RDataFrame (zlib, auto-split)",
+    GraphProperties(kGraphDeflated, "RDataFrame (zlib, auto-split)",
                     32);
   (*props_map)["rootautosplit-deflated~dataframemt"] =
     GraphProperties(kGraphDeflated,
-                    "ROOT / RDataFrameMT (zlib, auto-split)", 33);
+                    "RDataFrameMT (zlib, auto-split)", 33);
   (*props_map)["rootautosplit-deflated~dataframenoht"] =
     GraphProperties(kGraphDeflated,
-                    "ROOT / RDataFrameMT/no-HT (zlib, auto-split)", 34);
+                    "RDataFrameMT/no-HT (zlib, auto-split)", 34);
   (*props_map)["avro-inflated"] =
     GraphProperties(kGraphInflated, "Avro", 110);
   (*props_map)["avro-inflated~java"] =
@@ -134,7 +134,7 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
   (*props_map)["serialization-rootrow~unfixed-read"] =
     GraphProperties(kGraphRead, "ROOT (row-wise)", 10);
   (*props_map)["serialization-rootrow~fixed-read"] =
-    GraphProperties(kGraphRead, "ROOT / Fixed (row-wise)", 20);
+    GraphProperties(kGraphRead, "Fixed (row-wise)", 20);
   (*props_map)["serialization-protobuf-read"] =
     GraphProperties(kGraphRead, "Protobuf", 30);
   (*props_map)["serialization-root-write"] =
@@ -142,7 +142,7 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
   (*props_map)["serialization-rootrow~unfixed-write"] =
     GraphProperties(kGraphWrite, "ROOT (row-wise)", 110);
   (*props_map)["serialization-rootrow~fixed-write"] =
-    GraphProperties(kGraphWrite, "ROOT / Fixed (row-wise)", 120);
+    GraphProperties(kGraphWrite, "Fixed (row-wise)", 120);
   (*props_map)["serialization-protobuf-write"] =
     GraphProperties(kGraphWrite, "Protobuf", 130);
 
@@ -181,11 +181,11 @@ void FillPropsMap(std::map<TString, GraphProperties> *props_map) {
     GraphProperties(kGraphDeflated, "RDataFrameMT no-HT", 13);
 
   (*props_map)["split-root-inflated"] =
-   GraphProperties(kGraphInflated, "ROOT / Manual Branching", 0);
+   GraphProperties(kGraphInflated, "Manual Branching", 0);
   (*props_map)["split-rootautosplit-inflated"] =
-    GraphProperties(kGraphInflated, "ROOT / Auto Split", 2);
+    GraphProperties(kGraphInflated, "Auto Split", 2);
   (*props_map)["split-rootdeepsplit-inflated"] =
-    GraphProperties(kGraphInflated, "ROOT / Deep Split", 3);
+    GraphProperties(kGraphInflated, "Deep Split", 3);
   (*props_map)["split-protobuf-inflated"]
     = GraphProperties(kGraphInflated, "Protobuf", 10);
   (*props_map)["split-protobufdeep-inflated"]

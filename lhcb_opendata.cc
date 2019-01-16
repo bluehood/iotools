@@ -826,7 +826,8 @@ int main(int argc, char **argv) {
         input_format == FileFormats::kRootInflated ||
         input_format == FileFormats::kRootDeflated ||
         input_format == FileFormats::kRootAutosplitInflated ||
-        input_format == FileFormats::kRootAutosplitDeflated)
+        input_format == FileFormats::kRootAutosplitDeflated ||
+        input_format == FileFormats::kRootLz4)
     {
       return AnalyzeRootOptimized(input_paths, plot_only);
     } else {
@@ -839,7 +840,8 @@ int main(int argc, char **argv) {
         input_format == FileFormats::kRootInflated ||
         input_format == FileFormats::kRootDeflated ||
         input_format == FileFormats::kRootAutosplitInflated ||
-        input_format == FileFormats::kRootAutosplitDeflated)
+        input_format == FileFormats::kRootAutosplitDeflated ||
+        input_format == FileFormats::kRootLz4)
     {
       return AnalyzeRootDataframe(input_paths, plot_only,
                                   root_dataframe_mt, root_dataframe_ht);
