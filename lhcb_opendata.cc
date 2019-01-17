@@ -23,6 +23,7 @@
 #include <TClassTable.h>
 #include <TSystem.h>
 #include <TTreeReader.h>
+#include <TROOT.h>
 
 #include "util.h"
 
