@@ -11,8 +11,7 @@ all: libiotrace.so iotrace_capture iotrace_test \
   lhcb_opendata \
   libEvent.so \
   precision_test \
-	mkfaulty \
-	fuse_forward
+	mkfaulty
 
 .PHONY = clean benchmarks benchmark_clean
 

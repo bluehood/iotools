@@ -26,7 +26,7 @@ for i in $(seq 1 $BM_NITER); do
     format_string="(%x)\n%e\n%U\n%S\n%M\n%K\n%c\n%w\n%I\n%O"
   fi
   this_result=$(mktemp)
-  /bin/time -o $this_result -f "$format_string" $@
+  /usr/bin/time -o $this_result -f "$format_string" $@
   if [ $i -eq 1 ]; then
     mv $this_result ${BM_OUTPUT}.working
   else
