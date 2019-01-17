@@ -577,7 +577,7 @@ int AnalyzeRootDataframe(
     if (hyper_threading)
       ROOT::EnableImplicitMT();
     else
-      ROOT::EnableImplicitMT(6);
+      ROOT::EnableImplicitMT(4);
     nslots = ROOT::GetImplicitMTPoolSize();
     printf("Using %u slots\n", nslots);
   }
