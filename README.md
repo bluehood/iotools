@@ -4,13 +4,17 @@ The data files can be found here: https://cernbox.cern.ch/index.php/s/bWn6oeSUyv
 
 To run, setup the ROOT environment and call 'make' to build the binaries.
 Create a folder or symlink data/ that points to the B2HHH.$suffix files.
-Starting from the B2HHH.root file, other formats can be created like
+Starting from the B2HHH.root file (inflated/uncompressed), other formats can be created like
 
-    ./lhcb_opendata -i data/B2HHH.root -o root-lz4 (other supported formats: root-inflated, root-lzma)
+```
+./lhcb_opendata -i data/B2HHH.root -o root-lz4 (other supported formats: root-inflated, root-lzma, root-deflated)
+```
 
 To run the benchmarks, call the result_...txt targets, like
 
-    make result_read_mem.root-[lz4,inflated,lzma]~[dataframe,dataframemt,dataframenoht,treereader].txt
+```
+make result_read_mem.root(-lz4,-deflated,-inflated,-lzma)[~dataframe,~dataframemt,~dataframenoht,~treereader].txt
+```
 
 No `~XXX` section runs with TTree+SetBranchAddress.
 
