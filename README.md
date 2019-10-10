@@ -1,25 +1,35 @@
 Benchmark for reading and writing a typical HEP ntuple with several libraries / data formats.
 
-The data files can be found here: https://cernbox.cern.ch/index.php/s/bWn6oeSUyvtHP4t
+## The data
 
-To run, setup the ROOT environment and call 'make' to build the binaries.
-Create a folder or symlink data/ that points to the B2HHH.$suffix files.
-Starting from the B2HHH.root file (inflated/uncompressed), other formats can be created like
+The dataset can be found here: https://cernbox.cern.ch/index.php/s/bWn6oeSUyvtHP4t
+Starting from the B2HHH.root file (inflated/uncompressed, equivalent to B2HHH.root-inflated), other formats can be created with
 
 ```
 ./lhcb_opendata -i data/B2HHH.root -o root-lz4 (other supported formats: root-inflated, root-lzma, root-deflated)
 ```
 
-To run the benchmarks, call the result_...txt targets, like
+## The plot
+
+To generate the plot, copy the data in a `data` subdirectory, make sure you have both B2HHH.root-inflated and 
+B2HHH.root-deflated, then setup the desired ROOT environment and execute
+```
+bash make_plot.sh
+```
+
+## Running single benchmarks
+To run a benchmark, make the corresponding `result_...txt` targets, e.g.
 
 ```
 make result_read_mem.root(-lz4,-deflated,-inflated,-lzma)[~dataframe,~dataframemt,~dataframenoht,~treereader].txt
 ```
 
-No `~XXX` section runs with TTree+SetBranchAddress.
+No `~XXX` section triggers a run with `TTree+SetBranchAddress`.
 
-Then create the plots by calling
+Plots can be created with:
 
-    make graph_read_mem~evs.pdf  # show events per second on the y axis
-    make graph_read_mem~mbs.pdf  # show MB/s on the y axis
+```
+make graph_read_mem~evs.pdf  # show events per second on the y axis
+make graph_read_mem~mbs.pdf  # show MB/s on the y axis
+```
 
