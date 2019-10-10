@@ -1,4 +1,4 @@
-Benchmark for reading and writing a typical HEP ntuple with several libraries / data formats.
+Benchmark for reading a typical HEP ntuple with ROOT interfaces.
 
 ## The data
 
